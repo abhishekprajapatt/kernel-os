@@ -1,4 +1,4 @@
-# ⚙️ Kernel OS
+# ⚙️ Kernel OS 
 
 A minimal 64-bit x86 bare-metal kernel built from scratch, featuring a custom cross-compilation toolchain, VGA text output, and GRUB multiboot support.
 
