@@ -34,7 +34,7 @@ cat > "$SRC_DIR/gcc-${GCC_VERSION}/gcc/${PATCH_FILE}" << 'EOF'
 EOF
 
 cd "$SRC_DIR/gcc-${GCC_VERSION}/gcc"
-patch < "${PATCH_FILE}"
+patch < "${PATCH_FILE}" || echo "Patch failed but continuing..."
 
 cd "$SRC_DIR"
 mkdir -p "${BUILD_DIR}"

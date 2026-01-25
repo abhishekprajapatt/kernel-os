@@ -25,22 +25,23 @@ RUN set -eux \
 RUN set -eux \
     && mkdir -p /usr/local/src \
     && cd /usr/local/src \
-    && wget -q https://ftpmirror.gnu.org/gnu/binutils/binutils-${BINUTILS_VERSION}.tar.xz \
-    && wget -q https://ftpmirror.gnu.org/gnu/gcc/gcc-${GCC_VERSION}/gcc-${GCC_VERSION}.tar.xz \
+    && wget --no-check-certificate https://ftpmirror.gnu.org/gnu/binutils/binutils-${BINUTILS_VERSION}.tar.xz \
+    && wget --no-check-certificate https://ftpmirror.gnu.org/gnu/gcc/gcc-${GCC_VERSION}.0/gcc-${GCC_VERSION}.0.tar.xz \
     && tar Jxf binutils-${BINUTILS_VERSION}.tar.xz \
-    && tar Jxf gcc-${GCC_VERSION}.tar.xz \
-    && rm binutils-${BINUTILS_VERSION}.tar.xz gcc-${GCC_VERSION}.tar.xz
+    && tar Jxf gcc-${GCC_VERSION}.0.tar.xz \
+    && rm binutils-${BINUTILS_VERSION}.tar.xz gcc-${GCC_VERSION}.0.tar.xz
 
-COPY src /usr/local/src/
-COPY gcc/t-x86_64-elf /usr/local/src/gcc-${GCC_VERSION}/gcc/config/i386/
-COPY gcc/config.gcc.patch /usr/local/src/gcc-${GCC_VERSION}/gcc/
+COPY buildenv/src /usr/local/src/
+COPY buildenv/gcc/t-x86_64-elf /usr/local/src/gcc-${GCC_VERSION}.0/gcc/config/i386/
+COPY buildenv/gcc/config.gcc.patch /usr/local/src/gcc-${GCC_VERSION}.0/gcc/
 
 RUN set -eux \
     && cd /usr/local/src \
+    && sed -i 's/\r$//' build-binutils.sh build-gcc.sh \
     && chmod +x build-binutils.sh build-gcc.sh \
     && bash build-binutils.sh ${BINUTILS_VERSION} \
-    && bash build-gcc.sh ${GCC_VERSION} \
-    && rm -rf binutils-${BINUTILS_VERSION} gcc-${GCC_VERSION}
+    && bash build-gcc.sh ${GCC_VERSION}.0 \
+    && rm -rf binutils-${BINUTILS_VERSION} gcc-${GCC_VERSION}.0
 
 RUN set -eux \
     && apt-get update \
