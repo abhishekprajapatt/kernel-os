@@ -67,3 +67,17 @@ Contributions welcome! Fork and PR to [abhishekprajapatt/kernel-os](https://gith
 <!--
 # Screenshot
 ![KernelOS](./assets/kernel-os.png) -->
+<h2 align="center">Star History</h2>
+
+<p align="center">
+  <picture>
+    <source
+      media="(prefers-color-scheme: dark)"
+      srcset="assets/star-history/star-history-dark.svg"
+    />
+    <img
+      src="assets/star-history/star-history.svg"
+      alt="Star History Chart"
+    />
+  </picture>
+</p>
